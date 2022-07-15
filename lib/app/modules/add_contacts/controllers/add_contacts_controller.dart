@@ -9,9 +9,19 @@ class AddContactsController extends GetxController {
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController mobileNOCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
+
   final contact_form_key = GlobalKey<FormState>();
+
   late final key = nameCtrl.text;
-  late final value = mobileNOCtrl.text;
+  late final value = [mobileNOCtrl.text, emailCtrl.text];
+
+  @override
+  void onInit() {
+    contactBox = Hive.box("ContactBox");
+    super.onInit();
+  }
+
+//* validation -------------->>>>>>>>>
 
   String? validName(String? name) {
     if (name!.length < 5) {
@@ -36,11 +46,5 @@ class AddContactsController extends GetxController {
       contactBox.put(key, value);
       Get.offAllNamed(Routes.HOME);
     }
-  }
-
-  @override
-  void onInit() {
-    contactBox = Hive.box("ContactBox");
-    super.onInit();
   }
 }

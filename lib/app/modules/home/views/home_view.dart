@@ -5,43 +5,45 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  
-   HomeView({Key? key}) : super(key: key);
-   
+  HomeView({Key? key}) : super(key: key);
+
+  final contactBox = Get.find<AddContactsController>().contactBox;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: DARK_GREEN,
-        // appBar: AppBar(
-        //   title: Text('HomeView'),
-        //   centerTitle: true,
-        // ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
               Expanded(
-                // flex: 10,
-                child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: LIGHT_GREEN),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          final show = Get.find<AddContactsController>()
-                              .contactBox
-                              .get("mohammad");
-                          print(show);
-                        },
-                        child: Text("show"),
-                      ),
-                    )),
-              ),
+                  child: ValueListenableBuilder<Box>(
+                      valueListenable: contactBox.listenable(),
+                      builder: (context, box, contacts) {
+                        return ListView.separated(
+                            itemBuilder: ((context, index) {
+                              final key = contactBox.keys.toList()[index];
+                              final value = contactBox.get(key);
+                              return ListTile(
+                                title: Text("$value",
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                              );
+                            }),
+                            separatorBuilder: ((context, index) {
+                              return Divider();
+                            }),
+                            itemCount: contactBox.keys.toList().length);
+                      })),
               SizedBox(
                 height: 10,
               ),
