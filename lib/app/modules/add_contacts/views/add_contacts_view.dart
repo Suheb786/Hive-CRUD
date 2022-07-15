@@ -88,7 +88,7 @@ class AddContactsView extends GetView<AddContactsController> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          controller.checkSave();
+                          controller.check_and_Save();
                         },
                         child: Container(
                           width: Get.size.width,

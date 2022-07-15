@@ -1,4 +1,5 @@
 import 'package:contancts/app/data/controller/hive_controller.dart';
+import 'package:contancts/app/modules/add_contacts/controllers/add_contacts_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -10,8 +11,9 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put<HiveController>(HiveController());
-  Get.find<HiveController>().intializeHive;
+  await Hive.initFlutter();
+  var box = await Hive.openBox('ContactBox');
+  Get.put(AddContactsController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

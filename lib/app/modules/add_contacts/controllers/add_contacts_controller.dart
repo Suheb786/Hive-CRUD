@@ -10,6 +10,8 @@ class AddContactsController extends GetxController {
   TextEditingController mobileNOCtrl = TextEditingController();
   TextEditingController emailCtrl = TextEditingController();
   final contact_form_key = GlobalKey<FormState>();
+  late final key = nameCtrl.text;
+  late final value = mobileNOCtrl.text;
 
   String? validName(String? name) {
     if (name!.length < 5) {
@@ -29,8 +31,9 @@ class AddContactsController extends GetxController {
     }
   }
 
-  void checkSave() {
+  void check_and_Save() {
     if (contact_form_key.currentState!.validate()) {
+      contactBox.put(key, value);
       Get.offAllNamed(Routes.HOME);
     }
   }

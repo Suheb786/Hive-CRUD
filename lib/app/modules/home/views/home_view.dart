@@ -1,4 +1,5 @@
 import 'package:contancts/app/data/constants/colors.dart';
+import 'package:contancts/app/modules/add_contacts/controllers/add_contacts_controller.dart';
 import 'package:contancts/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  
+   HomeView({Key? key}) : super(key: key);
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +27,20 @@ class HomeView extends GetView<HomeController> {
               Expanded(
                 // flex: 10,
                 child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: LIGHT_GREEN),
-                ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: LIGHT_GREEN),
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          final show = Get.find<AddContactsController>()
+                              .contactBox
+                              .get("mohammad");
+                          print(show);
+                        },
+                        child: Text("show"),
+                      ),
+                    )),
               ),
               SizedBox(
                 height: 10,
