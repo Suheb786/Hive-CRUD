@@ -60,6 +60,7 @@ class CustomTextField extends StatelessWidget {
         maxLines: maxLines,
         textCapitalization: textCapitalization,
         onTap: onTap,
+        
         maxLength: maxLength,
         autovalidateMode: autoValid,
         keyboardType: keyboardType,

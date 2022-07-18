@@ -9,8 +9,8 @@ class HomeController extends GetxController {
   void onInit() {
     Get.put(AddContactsController);
     contactBox = Hive.box("ContactBox");
-    final show = Get.find<AddContactsController>().contactBox.get("mohammad");
-    print(show);
+    // final show = Get.find<AddContactsController>().contactBox.get("mohammad");
+    // print(show);
     super.onInit();
   }
 

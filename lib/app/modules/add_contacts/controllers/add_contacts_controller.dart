@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:contancts/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class AddContactsController extends GetxController {
-  late Box contactBox; //! not sure if it should be : late : or not
+  late Box contactBox; 
 
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController mobileNOCtrl = TextEditingController();
@@ -13,7 +15,7 @@ class AddContactsController extends GetxController {
   final contact_form_key = GlobalKey<FormState>();
 
   late final key = nameCtrl.text;
-  late final value = [mobileNOCtrl.text, emailCtrl.text];
+  late final value = mobileNOCtrl.text;
 
   @override
   void onInit() {
@@ -45,6 +47,17 @@ class AddContactsController extends GetxController {
     if (contact_form_key.currentState!.validate()) {
       contactBox.put(key, value);
       Get.offAllNamed(Routes.HOME);
+
+      final output = contactBox.get(key);
+      log("the values are: ${output} ");
     }
+  }
+
+  @override
+  void dispose() {
+    nameCtrl;
+    mobileNOCtrl;
+    emailCtrl;
+    super.dispose();
   }
 }

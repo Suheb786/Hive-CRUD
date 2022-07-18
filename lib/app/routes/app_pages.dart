@@ -1,3 +1,4 @@
+import 'package:contancts/app/modules/add_contacts/views/update_contacts_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/add_contacts/bindings/add_contacts_binding.dart';
@@ -21,6 +22,11 @@ class AppPages {
     GetPage(
       name: _Paths.ADD_CONTACTS,
       page: () => const AddContactsView(),
+      binding: AddContactsBinding(),
+    ),
+    GetPage(
+      name: _Paths.UPDATE_CONTATC,
+      page: () => UpdateContactsView(),
       binding: AddContactsBinding(),
     ),
   ];
